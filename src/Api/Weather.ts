@@ -5,6 +5,7 @@ export async function getWeather({ longitude, latitude }: WeatherTypes) {
   const params = {
     latitude,
     longitude,
+    timezone: "auto",
     daily: [
       "weather_code",
       "temperature_2m_max",
@@ -85,6 +86,7 @@ export async function getWeather({ longitude, latitude }: WeatherTypes) {
       "cloud_cover",
       "pressure_msl",
       "surface_pressure",
+      "apparent_temperature",
     ],
   };
   const url = "https://api.open-meteo.com/v1/forecast";
@@ -116,7 +118,7 @@ export async function getWeather({ longitude, latitude }: WeatherTypes) {
   // Note: The order of weather variables in the URL query and the indices below need to match!
   const weatherData = {
     current: {
-      time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
+      time: new Date(Number(current.time()) * 1000),
       temperature_2m: current.variables(0)!.value(),
       is_day: current.variables(1)!.value(),
       wind_speed_10m: current.variables(2)!.value(),
@@ -130,6 +132,7 @@ export async function getWeather({ longitude, latitude }: WeatherTypes) {
       cloud_cover: current.variables(10)!.value(),
       pressure_msl: current.variables(11)!.value(),
       surface_pressure: current.variables(12)!.value(),
+      apparent_temperature: hourly.variables(0)!.valuesArray(),
     },
     hourly: {
       time: [
@@ -228,26 +231,5 @@ export async function getWeather({ longitude, latitude }: WeatherTypes) {
       precipitation_probability_max: daily.variables(19)!.valuesArray(),
     },
   };
-
-  // 'weatherData' now contains a simple structure with arrays with datetime and weather data
-  console.log(
-    `\nCurrent time: ${weatherData.current.time}`,
-    `\nCurrent temperature_2m: ${weatherData.current.temperature_2m}`,
-    `\nCurrent is_day: ${weatherData.current.is_day}`,
-    `\nCurrent wind_speed_10m: ${weatherData.current.wind_speed_10m}`,
-    `\nCurrent wind_direction_10m: ${weatherData.current.wind_direction_10m}`,
-    `\nCurrent wind_gusts_10m: ${weatherData.current.wind_gusts_10m}`,
-    `\nCurrent precipitation: ${weatherData.current.precipitation}`,
-    `\nCurrent rain: ${weatherData.current.rain}`,
-    `\nCurrent showers: ${weatherData.current.showers}`,
-    `\nCurrent snowfall: ${weatherData.current.snowfall}`,
-    `\nCurrent weather_code: ${weatherData.current.weather_code}`,
-    `\nCurrent cloud_cover: ${weatherData.current.cloud_cover}`,
-    `\nCurrent pressure_msl: ${weatherData.current.pressure_msl}`,
-    `\nCurrent surface_pressure: ${weatherData.current.surface_pressure}`
-  );
-  console.log("\nHourly data", weatherData.hourly);
-  console.log("\nDaily data", weatherData.daily);
-
   return weatherData;
 }
