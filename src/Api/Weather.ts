@@ -1,8 +1,10 @@
+import { WeatherTypes } from "@/types/CountryTypes";
 import { fetchWeatherApi } from "openmeteo";
-export async function getWeather() {
+
+export async function getWeather({ longitude, latitude }: WeatherTypes) {
   const params = {
-    latitude: 52.52,
-    longitude: 13.41,
+    latitude,
+    longitude,
     daily: [
       "weather_code",
       "temperature_2m_max",
@@ -92,8 +94,8 @@ export async function getWeather() {
   const response = responses[0];
 
   // Attributes for timezone and location
-  const latitude = response.latitude();
-  const longitude = response.longitude();
+  const resLatitude = response.latitude();
+  const resLongitude = response.longitude();
   const elevation = response.elevation();
   const utcOffsetSeconds = response.utcOffsetSeconds();
 
