@@ -1,32 +1,41 @@
 import { InfoTypes } from "@/types/InfoTypes";
 import React from "react";
+import { useState } from "react";
+import { tailwindColours } from "../colours/ColorMode";
+import { ColourSate } from "@/types/ColourTypes";
 
 const MainBox = ({ temp, time, description, feelTemp, country }: InfoTypes) => {
+  const [isLight, setIsLight] = useState(true);
+  const colourState: ColourSate = { isLight, setIsLight };
+  const colours = tailwindColours(colourState);
+  const backgroundImageURL = "./sunny.webp";
+  const emojis = ["⛅", "🌨️", "☀️", "💧"];
+
   return (
     <div
-      className="
-        mx-4 sm:mx-10 lg:mx-20 
-        h-auto min-h-[90vh] lg:h-[90vh] 
-        border-x border-gray-400 
-        flex flex-col items-center
-        text-gray-400
-      "
+      style={{ backgroundImage: `url(${backgroundImageURL})` }}
+      className={
+        " bg-cover mx-4 sm:mx-10 lg:mx-20 h-auto min-h-[60vh]  border-x border-gray-400 justify-center flex flex-col items-center text-white"
+      }
     >
-      <div className="flex flex-col items-center p-8">
+      <div className="flex flex-col items-center">
         <div className="text-5xl mb-2">Weather In {country}</div>
-        <div className="text-xl">{time}</div>
-      </div>
-
-      <div className="flex flex-col items-center p-8">
-        <div className="text-9xl">
-          {temp != null ? temp.toFixed(0) : "N/A"}°
+        <div>
+          <div className="text-xl">{time}</div>
         </div>
       </div>
-
-      <div className="flex gap-2 items-center">
-        <div>{feelTemp[0]?.toFixed(0)}</div>
-        <div>|</div>
-        <div>{description}</div>
+      <div className="flex flex-col items-center">
+        <div className="flex items-center space-x-4">
+          <div className="text-8xl">
+            {temp != null ? temp.toFixed(0) : "N/A"}°
+          </div>
+          <div className="text-7xl">{emojis[0]}</div>
+        </div>
+        <div className="flex gap-2 items-center">
+          <div>{feelTemp[0]?.toFixed(0)}°</div>
+          <div>|</div>
+          <div>{description}</div>
+        </div>
       </div>
     </div>
   );

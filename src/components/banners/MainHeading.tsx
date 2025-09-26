@@ -5,6 +5,7 @@ import { CountryTypes } from "@/types/CountryTypes";
 import WeatherByCountry from "../menus/WeatherByCountry";
 import SettingBtn from "../buttons/SettingBtn";
 import AboutBtn from "../buttons/AboutBtn";
+import AuthBtn from "../buttons/AuthBtn";
 
 const MainHeading = ({
   setLongitude,
@@ -26,6 +27,7 @@ const MainHeading = ({
         setLatitude={setLatitude}
         setCountry={setCountry}
       />
+      <AuthBtn />
     </div>
   );
 };

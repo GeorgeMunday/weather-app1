@@ -1,13 +1,15 @@
 "use client";
-import { useEffect, useState } from "react";
 
+import { useEffect, useState } from "react";
 import { ColourSate } from "@/types/ColourTypes";
 import { tailwindColours } from "@/components/colours/ColorMode";
 import { getWeather } from "@/Api/Weather";
 import MainHeading from "@/components/banners/MainHeading";
 import MainBox from "@/components/banners/MainBox";
-import { weatherCodeDescriptions } from "@/api/CodeDescriptions";
-import { countryTimeZones } from "@/api/TimeZones";
+import { weatherCodeDescriptions } from "@/Api/CodeDescriptions";
+import { countryTimeZones } from "@/Api/TimeZones";
+import Footer from "@/components/banners/Footer";
+import TabelsBox from "@/components/banners/TabelsBox";
 
 export default function Home() {
   const [isLight, setIsLight] = useState(true);
@@ -17,6 +19,7 @@ export default function Home() {
   const [temp, setTemp] = useState<number | null>(null);
   const [feelTemp, setFeelTemp] = useState<number[]>([]);
   const [description, setDescription] = useState<string | null>(null);
+  const [dailyTemp, setDailyTemp] = useState<number[]>([]);
 
   const [longitude, setLongitude] = useState(13.41);
   const [latitude, setLatitude] = useState(52.52);
@@ -29,18 +32,23 @@ export default function Home() {
     async function fetchWeather() {
       const weather = await getWeather({ longitude, latitude });
       setTemp(weather.current.temperature_2m);
-
       const code = weather.current.weather_code;
       setDescription(weatherCodeDescriptions[code] || "Unknown");
-
       setCurrentTime(new Date(weather.current.time));
-
       const apparent = weather.current.apparent_temperature;
-      setFeelTemp(apparent ? Array.from(apparent) : []);
+      setFeelTemp(
+        apparent instanceof Float32Array
+          ? Array.from(apparent)
+          : typeof apparent === "number"
+          ? [apparent]
+          : []
+      );
+      const temps = Array.from(weather.hourly?.temperature_2m || []);
+      setDailyTemp(temps.slice(0, 12));
     }
+
     fetchWeather();
   }, [longitude, latitude]);
-
   useEffect(() => {
     if (!currentTime) return;
 
@@ -70,22 +78,34 @@ export default function Home() {
 
   return (
     <>
-      <MainHeading
-        longitude={longitude}
-        latitude={latitude}
-        setLongitude={setLongitude}
-        setLatitude={setLatitude}
-        setCountry={(value) => {
-          if (value) setCountry(value);
-        }}
-      />
-      <MainBox
-        temp={temp}
-        description={description}
-        time={time || "Loading..."}
-        feelTemp={feelTemp}
-        country={country || "Unknown Country"}
-      />
+      <div className="">
+        <MainHeading
+          longitude={longitude}
+          latitude={latitude}
+          setLongitude={setLongitude}
+          setLatitude={setLatitude}
+          setCountry={(value) => {
+            if (value) setCountry(value);
+          }}
+        />
+        <MainBox
+          temp={temp}
+          description={description}
+          time={time || "Loading..."}
+          feelTemp={feelTemp}
+          country={country || "Unknown Country"}
+          dailyTemp={dailyTemp}
+        />
+        <TabelsBox
+          temp={temp}
+          description={description}
+          time={time || "Loading..."}
+          feelTemp={feelTemp}
+          country={country || "Unknown Country"}
+          dailyTemp={dailyTemp}
+        />
+        <Footer />
+      </div>
     </>
   );
 }

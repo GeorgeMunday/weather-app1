@@ -48,7 +48,7 @@ const WeatherByCountry = ({
       value={selectedCountry}
       onChange={handleChange}
       placeholder="Select a country"
-      className="w-xl"
+      className="w-md"
     />
   );
 };
