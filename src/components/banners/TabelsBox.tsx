@@ -21,9 +21,7 @@ const TabelsBox = ({ dailyTemp }: InfoTypes) => {
         <Chart dailyTemp={dailyTemp} />
       </div>
       <h3 className="text-sm opacity-80">predicted rainfall</h3>
-      <Chart dailyTemp={dailyTemp} />
       <h3 className="text-sm opacity-80">Humidity</h3>
-      <Chart dailyTemp={dailyTemp} />
     </div>
   );
 };

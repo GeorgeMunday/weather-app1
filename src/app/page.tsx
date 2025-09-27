@@ -44,7 +44,7 @@ export default function Home() {
           : []
       );
       const temps = Array.from(weather.hourly?.temperature_2m || []);
-      setDailyTemp(temps.slice(0, 12));
+      setDailyTemp(temps.slice(0, 25));
     }
 
     fetchWeather();

@@ -8,7 +8,16 @@ const MainBox = ({ temp, time, description, feelTemp, country }: InfoTypes) => {
   const [isLight, setIsLight] = useState(true);
   const colourState: ColourSate = { isLight, setIsLight };
   const colours = tailwindColours(colourState);
-  const backgroundImageURL = "./sunny.webp";
+
+  var backgroundImageURL = "";
+  if (country === "USA") {
+    backgroundImageURL = "./usa.avif";
+  } else if (country === "England") {
+    backgroundImageURL = "./england.webp";
+  } else if (country === "Germany") {
+    backgroundImageURL = "germany.jpg";
+  }
+
   const emojis = ["⛅", "🌨️", "☀️", "💧"];
 
   return (

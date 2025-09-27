@@ -1,4 +1,3 @@
-import { getWeather } from "@/Api/Weather";
 import BrandName from "../text/BrandName";
 import HomeBtn from "../buttons/HomeBtn";
 import { CountryTypes } from "@/types/CountryTypes";
