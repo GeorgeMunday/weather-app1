@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
   Tooltip,
   CartesianGrid,
+  Legend,
 } from "recharts";
 
 interface WeatherLineChartProps {
@@ -28,7 +29,7 @@ const WeatherLineChart: React.FC<WeatherLineChartProps> = React.memo(
     }));
 
     return (
-      <div className="w-[100%] h-[250px]">
+      <div className="w-[100%] h-[250px] mr-10">
         {title && <h3 className="text-lg font-semibold mb-2">{title}</h3>}
         <ResponsiveContainer>
           <LineChart data={chartData}>
@@ -43,8 +44,17 @@ const WeatherLineChart: React.FC<WeatherLineChartProps> = React.memo(
                 fontSize: 12,
               }}
               tick={{ fontSize: 12 }}
+              width={40}
             />
-            <Tooltip />
+            <Tooltip
+              formatter={(value: number | string) => {
+                const num =
+                  typeof value === "number" ? value : parseFloat(value);
+                return num.toFixed(1);
+              }}
+              labelFormatter={() => ""}
+              cursor={false}
+            />
             <Line
               type="monotone"
               dataKey="y"

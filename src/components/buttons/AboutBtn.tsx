@@ -1,7 +1,12 @@
 import React from "react";
+import Link from "next/link";
 
 const AboutBtn = () => {
-  return <div>About</div>;
+  return (
+    <>
+      <Link href="/about">About</Link>
+    </>
+  );
 };
 
 export default AboutBtn;

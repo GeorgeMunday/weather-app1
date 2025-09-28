@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import { ColourSate } from "@/types/ColourTypes";
 import { tailwindColours } from "@/components/colours/ColorMode";
-import { getWeather } from "@/Api/Weather";
+import { getWeather } from "@/api/Weather";
 import MainHeading from "@/components/banners/MainHeading";
 import MainBox from "@/components/banners/MainBox";
-import { weatherCodeDescriptions } from "@/Api/CodeDescriptions";
-import { countryTimeZones } from "@/Api/TimeZones";
+import { weatherCodeDescriptions } from "@/api/CodeDescriptions";
+import { countryTimeZones } from "@/api/TimeZones";
 import Footer from "@/components/banners/Footer";
 import TabelsBox from "@/components/banners/TabelsBox";
 
@@ -23,10 +23,12 @@ export default function Home() {
   const [rainChance, setRainChance] = useState<number[]>([]);
   const [humidity, setHumidity] = useState<number[]>([]);
   const [cloudCover, setCloudCover] = useState<number[]>([]);
+  const [wind, setWind] = useState<number[]>([]);
+  const [visibility, setVisibility] = useState<number[]>([]);
 
-  const [longitude, setLongitude] = useState(13.41);
-  const [latitude, setLatitude] = useState(52.52);
-  const [country, setCountry] = useState("Germany");
+  const [longitude, setLongitude] = useState(-0.1278);
+  const [latitude, setLatitude] = useState(51.5074);
+  const [country, setCountry] = useState("England");
 
   const [currentTime, setCurrentTime] = useState<Date | null>(null);
   const [time, setTime] = useState<string>("");
@@ -61,6 +63,12 @@ export default function Home() {
 
       const cloudData = Array.from(weather.hourly?.cloud_cover || []);
       setCloudCover(cloudData.slice(0, 25));
+
+      const windData = Array.from(weather.hourly?.wind_speed_10m || []);
+      setWind(windData.slice(0, 25));
+
+      const visData = Array.from(weather.hourly?.visibility || []);
+      setVisibility(visData.slice(0, 25));
     }
 
     fetchWeather();
@@ -104,6 +112,7 @@ export default function Home() {
             if (value) setCountry(value);
           }}
         />
+        <hr className="border-gray-400 mb-0" />
         <MainBox
           temp={temp}
           description={description}
@@ -114,6 +123,8 @@ export default function Home() {
           rainChance={rainChance}
           humidity={humidity}
           cloudCover={cloudCover}
+          wind={wind}
+          visibility={visibility}
         />
         <TabelsBox
           temp={temp}
@@ -125,6 +136,8 @@ export default function Home() {
           rainChance={rainChance}
           humidity={humidity}
           cloudCover={cloudCover}
+          wind={wind}
+          visibility={visibility}
         />
         <Footer />
       </div>

@@ -8,4 +8,6 @@ export type InfoTypes = {
   rainChance: number[];
   humidity: number[];
   country: string;
+  wind: number[];
+  visibility: number[];
 };

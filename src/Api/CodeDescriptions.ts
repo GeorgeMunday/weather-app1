@@ -20,3 +20,29 @@ weatherCodeDescriptions[82] = "Violent rain showers";
 weatherCodeDescriptions[95] = "Thunderstorm";
 weatherCodeDescriptions[96] = "Thunderstorm with slight hail";
 weatherCodeDescriptions[99] = "Thunderstorm with heavy hail";
+
+export const getEmoji = (description: string): string => {
+  if (description === "Clear sky") return "☀️";
+  if (description === "Mainly clear") return "🌤️";
+  if (description === "Partly cloudy") return "⛅";
+  if (description === "Overcast") return "☁️";
+  if (description === "Fog") return "🌫️";
+  if (description === "Depositing rime fog") return "🌫️";
+  if (description === "Light drizzle") return "🌦️";
+  if (description === "Moderate drizzle") return "🌦️";
+  if (description === "Dense drizzle") return "🌧️";
+  if (description === "Slight rain") return "🌧️";
+  if (description === "Moderate rain") return "🌧️";
+  if (description === "Heavy rain") return "🌧️";
+  if (description === "Slight snow fall") return "🌨️";
+  if (description === "Moderate snow fall") return "🌨️";
+  if (description === "Heavy snow fall") return "❄️";
+  if (description === "Rain showers") return "🌦️";
+  if (description === "Heavy rain showers") return "🌧️";
+  if (description === "Violent rain showers") return "🌧️";
+  if (description === "Thunderstorm") return "⛈️";
+  if (description === "Thunderstorm with slight hail") return "⛈️";
+  if (description === "Thunderstorm with heavy hail") return "⛈️";
+
+  return "";
+};
