@@ -4,7 +4,12 @@ import { tailwindColours } from "../colours/ColorMode";
 import { ColourSate } from "@/types/ColourTypes";
 import Chart from "../charts/Chart";
 
-const TabelsBox = ({ dailyTemp }: InfoTypes) => {
+const TabelsBox = ({
+  dailyTemp,
+  humidity,
+  rainChance,
+  cloudCover,
+}: InfoTypes) => {
   const [isLight, setIsLight] = useState(true);
   const colourState: ColourSate = { isLight, setIsLight };
   const colours = tailwindColours(colourState);
@@ -17,11 +22,28 @@ const TabelsBox = ({ dailyTemp }: InfoTypes) => {
         <h1 className="text-2xl font-semibold mb-1">Statistics</h1>
         <h3 className="text-sm opacity-80">Future predicted temps</h3>
       </div>
-      <div className="overflow-x-auto">
-        <Chart dailyTemp={dailyTemp} />
-      </div>
-      <h3 className="text-sm opacity-80">predicted rainfall</h3>
+      <Chart
+        data={dailyTemp}
+        label="°C"
+        color="#f97316"
+        title="Hourly Temperature"
+      />
+      <h3 className="text-sm opacity-80">rainfall %</h3>
+      <Chart
+        data={rainChance}
+        label="% Chance"
+        color="#0ea5e9"
+        title="Rain Probability"
+      />
       <h3 className="text-sm opacity-80">Humidity</h3>
+      <Chart
+        data={humidity}
+        label="% Humidity"
+        color="#22c55e"
+        title="Humidity Levels"
+      />
+      <h3 className="text-sm opacity-80">Clouds</h3>
+      <Chart data={cloudCover} label="%" color="#64748b" title="Cloud Cover" />
     </div>
   );
 };

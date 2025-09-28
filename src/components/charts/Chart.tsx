@@ -1,37 +1,62 @@
 "use client";
 
 import React from "react";
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  ResponsiveContainer,
+  Tooltip,
+  CartesianGrid,
+} from "recharts";
 
-interface TempChartProps {
-  dailyTemp: number[];
+interface WeatherLineChartProps {
+  data: number[];
+  label?: string;
+  color?: string;
+  title?: string;
 }
 
-const Chart: React.FC<TempChartProps> = React.memo(({ dailyTemp }) => {
-  if (!dailyTemp || dailyTemp.length === 0) return null;
+const WeatherLineChart: React.FC<WeatherLineChartProps> = React.memo(
+  ({ data, label = "Value", color = "#8884d8", title }) => {
+    if (!data || data.length === 0) return null;
 
-  const data = dailyTemp.map((temp, i) => ({
-    x: i,
-    y: temp,
-  }));
+    const chartData = data.map((value, index) => ({
+      x: index,
+      y: value,
+    }));
 
-  return (
-    <div className="w-[800px] h-[200px]">
-      <ResponsiveContainer>
-        <LineChart data={data}>
-          <XAxis dataKey="x" />
-          <YAxis />
-          <Line
-            type="monotone"
-            dataKey="y"
-            stroke="#8884d8"
-            strokeWidth={2}
-            dot={false}
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
-  );
-});
+    return (
+      <div className="w-[100%] h-[250px]">
+        {title && <h3 className="text-lg font-semibold mb-2">{title}</h3>}
+        <ResponsiveContainer>
+          <LineChart data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="x" tick={{ fontSize: 12 }} />
+            <YAxis
+              label={{
+                value: label,
+                angle: -90,
+                position: "insideLeft",
+                offset: 10,
+                fontSize: 12,
+              }}
+              tick={{ fontSize: 12 }}
+            />
+            <Tooltip />
+            <Line
+              type="monotone"
+              dataKey="y"
+              stroke={color}
+              strokeWidth={2}
+              dot={false}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    );
+  }
+);
 
-export default Chart;
+export default WeatherLineChart;

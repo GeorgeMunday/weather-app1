@@ -4,5 +4,8 @@ export type InfoTypes = {
   description: string | null;
   feelTemp: number[];
   dailyTemp: number[];
+  cloudCover: number[];
+  rainChance: number[];
+  humidity: number[];
   country: string;
 };

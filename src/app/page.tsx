@@ -20,6 +20,9 @@ export default function Home() {
   const [feelTemp, setFeelTemp] = useState<number[]>([]);
   const [description, setDescription] = useState<string | null>(null);
   const [dailyTemp, setDailyTemp] = useState<number[]>([]);
+  const [rainChance, setRainChance] = useState<number[]>([]);
+  const [humidity, setHumidity] = useState<number[]>([]);
+  const [cloudCover, setCloudCover] = useState<number[]>([]);
 
   const [longitude, setLongitude] = useState(13.41);
   const [latitude, setLatitude] = useState(52.52);
@@ -45,6 +48,19 @@ export default function Home() {
       );
       const temps = Array.from(weather.hourly?.temperature_2m || []);
       setDailyTemp(temps.slice(0, 25));
+
+      const rainChances = Array.from(
+        weather.hourly?.precipitation_probability || []
+      );
+      setRainChance(rainChances.slice(0, 25));
+
+      const humidityData = Array.from(
+        weather.hourly?.relative_humidity_2m || []
+      );
+      setHumidity(humidityData.slice(0, 25));
+
+      const cloudData = Array.from(weather.hourly?.cloud_cover || []);
+      setCloudCover(cloudData.slice(0, 25));
     }
 
     fetchWeather();
@@ -95,6 +111,9 @@ export default function Home() {
           feelTemp={feelTemp}
           country={country || "Unknown Country"}
           dailyTemp={dailyTemp}
+          rainChance={rainChance}
+          humidity={humidity}
+          cloudCover={cloudCover}
         />
         <TabelsBox
           temp={temp}
@@ -103,6 +122,9 @@ export default function Home() {
           feelTemp={feelTemp}
           country={country || "Unknown Country"}
           dailyTemp={dailyTemp}
+          rainChance={rainChance}
+          humidity={humidity}
+          cloudCover={cloudCover}
         />
         <Footer />
       </div>
