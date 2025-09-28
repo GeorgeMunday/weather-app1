@@ -22,28 +22,13 @@ const TabelsBox = ({
         <h1 className="text-2xl font-semibold mb-1">Statistics</h1>
         <h3 className="text-sm opacity-80">Future predicted temps</h3>
       </div>
-      <Chart
-        data={dailyTemp}
-        label="°C"
-        color="#f97316"
-        title="Hourly Temperature"
-      />
+      <Chart data={dailyTemp} label="" color="#f97316" title="" />
       <h3 className="text-sm opacity-80">rainfall %</h3>
-      <Chart
-        data={rainChance}
-        label="% Chance"
-        color="#0ea5e9"
-        title="Rain Probability"
-      />
+      <Chart data={rainChance} label="" color="#0ea5e9" title="" />
       <h3 className="text-sm opacity-80">Humidity</h3>
-      <Chart
-        data={humidity}
-        label="% Humidity"
-        color="#22c55e"
-        title="Humidity Levels"
-      />
+      <Chart data={humidity} label="" color="#22c55e" title="" />
       <h3 className="text-sm opacity-80">Clouds</h3>
-      <Chart data={cloudCover} label="%" color="#64748b" title="Cloud Cover" />
+      <Chart data={cloudCover} label="%" color="#64748b" title="" />
     </div>
   );
 };

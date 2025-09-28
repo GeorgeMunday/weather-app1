@@ -16,8 +16,13 @@ const MainBox = ({ temp, time, description, feelTemp, country }: InfoTypes) => {
     backgroundImageURL = "./england.webp";
   } else if (country === "Germany") {
     backgroundImageURL = "germany.jpg";
+  } else if (country === "Japan") {
+    backgroundImageURL = "japan.webp";
+  } else if (country === "France") {
+    backgroundImageURL = "france.jpg";
+  } else if (country === "Australia") {
+    backgroundImageURL = "faustralia.jpg";
   }
-
   const emojis = ["⛅", "🌨️", "☀️", "💧"];
 
   return (
