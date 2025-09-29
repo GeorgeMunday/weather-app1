@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { tailwindColours } from "../colours/ColorMode";
 import { ColourSate } from "@/types/ColourTypes";
 import Chart from "../menus/diagrams/Chart";
+import { Link } from "lucide-react";
+import AuthBtn from "../buttons/AuthBtn";
 
 const TabelsBox = ({
   dailyTemp,
@@ -18,10 +20,10 @@ const TabelsBox = ({
 
   return (
     <div
-      className={`mx-4 sm:mx-10 lg:mx-80 h-auto min-h-[40vh] border-x border-gray-400 flex flex-col items-center justify-center`}
+      className={`mx-4 sm:mx-10 lg:mx-20 h-auto min-h-[40vh] border-x border-gray-400 flex flex-col items-center justify-center`}
     >
       <div className="flex flex-col items-center py-6 text-center">
-        <h1 className="text-2xl font-semibold mb-1">Statistics</h1>
+        <h1 className="text-2xl  mb-1">Statistics</h1>
         <h3 className="text-sm opacity-80">Future predicted temps</h3>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10 w-full px-4 pt-10">

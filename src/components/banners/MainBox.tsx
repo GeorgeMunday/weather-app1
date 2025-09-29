@@ -29,13 +29,15 @@ const MainBox = ({ temp, time, description, feelTemp, country }: InfoTypes) => {
     backgroundImageURL = "france.jpg";
   } else if (country === "Australia") {
     backgroundImageURL = "australia.webp";
+  } else {
+    backgroundImageURL = "placeholder.webp";
   }
 
   return (
     <div
       style={{ backgroundImage: `url(${backgroundImageURL})` }}
       className={
-        " bg-cover mx-4 sm:mx-10 lg:mx-80 h-auto min-h-[80vh] border-l-1 border-r-1 border-gray-400 justify-center flex flex-col items-center text-white"
+        " bg-cover mx-4 md:mx-10 lg:mx-20 h-auto min-h-[80vh] border-l-1 border-r-1 border-gray-400 justify-center flex flex-col items-center text-white"
       }
     >
       <div className="flex flex-col items-center">

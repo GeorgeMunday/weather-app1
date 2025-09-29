@@ -18,8 +18,8 @@ const MainHeading = ({
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="bg-white sm:mx-10 lg:mx-80  border-gray-400 ">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div className="bg-white border-gray-400 w-full">
+      <div className="w-full h-24 flex items-center justify-between px-4">
         <BrandName />
         <WeatherByCountry
           longitude={longitude}
@@ -33,7 +33,7 @@ const MainHeading = ({
         </button>
       </div>
       {menuOpen && (
-        <div className="px-6 pb-4 flex flex-col gap-3 bg-white border-t border-gray-200">
+        <div className="w-full px-4 pb-4 flex flex-col gap-3 bg-white border-t border-gray-200">
           <HomeBtn />
           <SettingBtn />
           <AboutBtn />

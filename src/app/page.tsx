@@ -10,6 +10,7 @@ import { weatherCodeDescriptions } from "@/api/CodeDescriptions";
 import { countryTimeZones } from "@/api/TimeZones";
 import Footer from "@/components/banners/Footer";
 import TabelsBox from "@/components/banners/TabelsBox";
+import MissingFeatures from "@/components/banners/features";
 
 export default function Home() {
   const [isLight, setIsLight] = useState(true);
@@ -139,6 +140,7 @@ export default function Home() {
           wind={wind}
           visibility={visibility}
         />
+        <MissingFeatures />
         <Footer />
       </div>
     </>
