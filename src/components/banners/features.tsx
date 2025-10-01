@@ -1,41 +1,49 @@
-import { XCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 
 export default function MissingFeatures() {
   const features = [
     "Set your default country for quick access",
-    "Search and save multiple locations",
-    "More weather data",
-    "Sync your favorites across devices",
+    "Easily search and save multiple locations",
+    "Access detailed weather data",
+    "Sync your favorites across all your devices",
   ];
 
   return (
-    <div className=" mx-4 md:mx-10 lg:mx-20 h-auto border-l-1 border-r-1 border-gray-400 justify-center flex flex-col items-cente">
-      <div className=" bg-white flex flex-col items-center justify-center  border-gray-400">
-        <h2 className="text-2xl mt-5 text-center text-black mb-8">
-          What you’ll miss without signing in
-        </h2>
-        <div className="w-full max-w-3xl border border-black aspect-video flex items-center justify-center bg-white">
-          <p className="text-black">video goes here</p>
+    <div className="mx-4 md:mx-10 lg:mx-20 min-h-[80vh] flex flex-col items-center py-12">
+      <h2 className="text-2xl text-center text-black mb-12 font-semibold">
+        Enjoy These Features When You Sign In
+      </h2>
+
+      {/* Single feature box */}
+      <div className="w-full max-w-md border border-black rounded-3xl overflow-hidden shadow-lg bg-white">
+        {/* Top video section */}
+        <div className="w-full aspect-video flex items-center justify-center bg-gray-100 border-b border-black">
+          <p className="text-black text-sm text-center px-4">
+            Overview video of Sign In & Sign Up features
+          </p>
         </div>
-        <div className="w-full max-w-5xl border border-black p-6">
-          <ul className="columns-1 md:columns-2 gap-6">
+
+        {/* Features section */}
+        <div className="p-8">
+          <h3 className="text-xl font-semibold text-black mb-6 text-center">
+            Key Benefits
+          </h3>
+          <ul className="space-y-4">
             {features.map((feature, idx) => (
-              <li
-                key={idx}
-                className="flex items-center text-black mb-3 break-inside-avoid"
-              >
-                <XCircle className="w-5 h-5 mr-2 text-black shrink-0" />
+              <li key={idx} className="flex items-center text-black">
+                <CheckCircle className="w-6 h-6 mr-3 text-green-500 shrink-0" />
                 {feature}
               </li>
             ))}
           </ul>
         </div>
+      </div>
 
-        <div className="text-center pt-8">
-          <p className="text-black text-sm mb-4">
-            Sign in now to unlock the full experience.
-          </p>
-        </div>
+      {/* Call to action */}
+      <div className="text-center pt-12">
+        <p className="text-black text-sm mb-4">
+          Sign in or sign up now to enjoy all these features.
+        </p>
       </div>
     </div>
   );

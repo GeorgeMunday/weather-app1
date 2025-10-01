@@ -13,10 +13,6 @@ import TabelsBox from "@/components/banners/TabelsBox";
 import MissingFeatures from "@/components/banners/features";
 
 export default function Home() {
-  const [isLight, setIsLight] = useState(true);
-  const colourState: ColourSate = { isLight, setIsLight };
-  const colours = tailwindColours(colourState);
-
   const [temp, setTemp] = useState<number | null>(null);
   const [feelTemp, setFeelTemp] = useState<number[]>([]);
   const [description, setDescription] = useState<string | null>(null);
@@ -113,7 +109,6 @@ export default function Home() {
             if (value) setCountry(value);
           }}
         />
-        <hr className="border-gray-400 mb-0" />
         <MainBox
           temp={temp}
           description={description}
@@ -140,6 +135,7 @@ export default function Home() {
           wind={wind}
           visibility={visibility}
         />
+        <hr className="border-gray-400 mb-0 mt-5" />
         <MissingFeatures />
         <Footer />
       </div>

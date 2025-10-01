@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import { tailwindColours } from "../colours/ColorMode";
 import { ColourSate } from "@/types/ColourTypes";
 import Chart from "../menus/diagrams/Chart";
-import { Link } from "lucide-react";
-import AuthBtn from "../buttons/AuthBtn";
+import { useTheme } from "@/context/ThemeContext";
 
 const TabelsBox = ({
   dailyTemp,
@@ -14,43 +13,35 @@ const TabelsBox = ({
   wind,
   visibility,
 }: InfoTypes) => {
-  const [isLight, setIsLight] = useState(true);
-  const colourState: ColourSate = { isLight, setIsLight };
-  const colours = tailwindColours(colourState);
+  const { isLight } = useTheme();
+  const colours = tailwindColours({ isLight, setIsLight: () => {} });
 
   return (
     <div
-      className={`mx-4 sm:mx-10 lg:mx-20 h-auto min-h-[40vh] border-x border-gray-400 flex flex-col items-center justify-center`}
+      className={`${colours.background} ${colours.text} w-full min-h-[40vh] flex flex-col items-center py-6`}
     >
       <div className="flex flex-col items-center py-6 text-center">
-        <h1 className="text-2xl  mb-1">Statistics</h1>
-        <h3 className="text-sm opacity-80">Future predicted temps</h3>
+        <h1 className="text-2xl mb-1 font-semibold">Statistics</h1>
+        <h3 className="text-sm opacity-80">Future predicted temperatures</h3>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10 w-full px-4 pt-10">
-        <div className="flex flex-col items-center text-center">
-          <h3 className="text-sm opacity-80 mb-2">Temperature | °C</h3>
-          <Chart data={dailyTemp} label="" color="#f97316" title="" />
-        </div>
-        <div className="flex flex-col items-center text-center">
-          <h3 className="text-sm opacity-80 mb-2">Chance of Rain | %</h3>
-          <Chart data={rainChance} label="" color="#0ea5e9" title="" />
-        </div>
-        <div className="flex flex-col items-center text-center">
-          <h3 className="text-sm opacity-80 mb-2">Humidity | %</h3>
-          <Chart data={humidity} label="" color="#22c55e" title="" />
-        </div>
-        <div className="flex flex-col items-center text-center">
-          <h3 className="text-sm opacity-80 mb-2">Clouds Cover | %</h3>
-          <Chart data={cloudCover} label="" color="#64748b" title="" />
-        </div>
-        <div className="flex flex-col items-center text-center">
-          <h3 className="text-sm opacity-80 mb-2">Wind Speen | km/h</h3>
-          <Chart data={wind} label="" color="#64748b" title="" />
-        </div>
-        <div className="flex flex-col items-center text-center">
-          <h3 className="text-sm opacity-80 mb-2">Visibility | m</h3>
-          <Chart data={visibility} label="" color="#64748b" title="" />
-        </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full px-4">
+        {[
+          { title: "Temperature | °C", data: dailyTemp, color: "#f97316" },
+          { title: "Chance of Rain | %", data: rainChance, color: "#0ea5e9" },
+          { title: "Humidity | %", data: humidity, color: "#22c55e" },
+          { title: "Cloud Cover | %", data: cloudCover, color: "#64748b" },
+          { title: "Wind Speed | km/h", data: wind, color: "#64748b" },
+          { title: "Visibility | m", data: visibility, color: "#64748b" },
+        ].map((item, idx) => (
+          <div
+            key={idx}
+            className={`flex flex-col items-center text-center w-full p-4 rounded-2xl shadow-sm ${colours.card} ${colours.text}`}
+          >
+            <h3 className="text-sm opacity-80 mb-2">{item.title}</h3>
+            <Chart data={item.data} label="" color={item.color} title="" />
+          </div>
+        ))}
       </div>
     </div>
   );
