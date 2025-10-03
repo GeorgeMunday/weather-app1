@@ -9,8 +9,6 @@ import { getEmoji } from "@/api/CodeDescriptions";
 const MainBox = ({ temp, time, description, feelTemp, country }: InfoTypes) => {
   const [emoji, setEmoji] = useState("N/A");
   const [isLight, setIsLight] = useState(true);
-  const colourState: ColourSate = { isLight, setIsLight };
-  const colours = tailwindColours(colourState);
 
   useEffect(() => {
     setEmoji(getEmoji(description || ""));

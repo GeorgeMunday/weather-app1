@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ColourSate } from "@/types/ColourTypes";
-import { tailwindColours } from "@/components/colours/ColorMode";
 import { getWeather } from "@/api/Weather";
 import MainHeading from "@/components/banners/MainHeading";
 import MainBox from "@/components/banners/MainBox";
@@ -135,7 +133,6 @@ export default function Home() {
           wind={wind}
           visibility={visibility}
         />
-        <hr className="border-gray-400 mb-0 mt-5" />
         <MissingFeatures />
         <Footer />
       </div>

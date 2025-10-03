@@ -7,6 +7,8 @@ import AboutBtn from "../buttons/AboutBtn";
 import AuthBtn from "../buttons/AuthBtn";
 import WeatherByCountry from "../menus/WeatherByCountry";
 import { CountryTypes } from "@/types/CountryTypes";
+import { useTheme } from "@/context/ThemeContext";
+import { tailwindColours } from "@/components/colours/ColorMode";
 
 const MainHeading = ({
   setLongitude,
@@ -16,24 +18,30 @@ const MainHeading = ({
   latitude,
 }: CountryTypes) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { isLight } = useTheme();
+  const colours = tailwindColours({ isLight, setIsLight: () => {} });
 
   return (
-    <div className="bg-white border-gray-400 w-full">
+    <div className={`w-full ${colours.background} ${colours.text}`}>
       <div className="w-full h-24 flex items-center justify-between px-4">
         <BrandName />
-        <WeatherByCountry
-          longitude={longitude}
-          latitude={latitude}
-          setLongitude={setLongitude}
-          setLatitude={setLatitude}
-          setCountry={setCountry}
-        />
+        <div className="text-black">
+          <WeatherByCountry
+            longitude={longitude}
+            latitude={latitude}
+            setLongitude={setLongitude}
+            setLatitude={setLatitude}
+            setCountry={setCountry}
+          />
+        </div>
         <button className="text-2xl" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <HiX /> : <HiMenu />}
         </button>
       </div>
       {menuOpen && (
-        <div className="w-full px-4 pb-4 flex flex-col gap-3 bg-white border-t border-gray-200">
+        <div
+          className={`w-full px-4 pb-4 flex flex-col gap-3 border-t ${colours.card} ${colours.text}`}
+        >
           <HomeBtn />
           <SettingBtn />
           <AboutBtn />
