@@ -1,4 +1,4 @@
-import AboutBox from "@/components/banners/AboutBox";
+import AboutBox from "@/components/boxes/AboutBox";
 import Footer from "@/components/banners/Footer";
 import SubHeading from "@/components/banners/SubHeading";
 import React from "react";

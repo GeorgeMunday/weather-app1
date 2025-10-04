@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import { db, auth } from "@/firebase/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebase/firebase";
 import { useRouter } from "next/navigation";
 import SubHeading from "@/components/banners/SubHeading";
 import Footer from "@/components/banners/Footer";
@@ -11,17 +10,19 @@ const page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-
+  const router = useRouter();
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      console.log("user logged in");
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
+        setEmail("");
+        setPassword("");
+        router.push("/");
       } else {
         setError("An unknown error occurred.");
       }

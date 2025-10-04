@@ -1,7 +1,6 @@
 import { InfoTypes } from "@/types/InfoTypes";
-import React, { useState } from "react";
+import React from "react";
 import { tailwindColours } from "../colours/ColorMode";
-import { ColourSate } from "@/types/ColourTypes";
 import Chart from "../menus/diagrams/Chart";
 import { useTheme } from "@/context/ThemeContext";
 

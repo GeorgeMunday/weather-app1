@@ -1,14 +1,19 @@
+"use client";
+
 import React, { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import BrandName from "../text/BrandName";
-import HomeBtn from "../buttons/HomeBtn";
-import SettingBtn from "../buttons/SettingBtn";
-import AboutBtn from "../buttons/AboutBtn";
-import AuthBtn from "../buttons/AuthBtn";
+import HomeBtn from "../buttons/navigation/HomeBtn";
+import SettingBtn from "../buttons/navigation/SettingBtn";
+import AboutBtn from "../buttons/navigation/AboutBtn";
 import WeatherByCountry from "../menus/WeatherByCountry";
 import { CountryTypes } from "@/types/CountryTypes";
 import { useTheme } from "@/context/ThemeContext";
 import { tailwindColours } from "@/components/colours/ColorMode";
+import SigninBtn from "../buttons/auth/SigninBtn";
+import SignupBtn from "../buttons/auth/SignupBtn";
+import SignOutBtn from "../buttons/auth/SignOutBtn";
+import { useAuth } from "@/context/AuthContext";
 
 const MainHeading = ({
   setLongitude,
@@ -18,14 +23,23 @@ const MainHeading = ({
   latitude,
 }: CountryTypes) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user } = useAuth();
   const { isLight } = useTheme();
   const colours = tailwindColours({ isLight, setIsLight: () => {} });
 
+  const Links = () => (
+    <>
+      <HomeBtn />
+      <SettingBtn />
+      <AboutBtn />
+    </>
+  );
+
   return (
     <div className={`w-full ${colours.background} ${colours.text}`}>
-      <div className="w-full h-24 flex items-center justify-between px-4">
+      <div className="w-full h-24 flex items-center justify-between px-4 z-50">
         <BrandName />
-        <div className="text-black">
+        <div className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50 text-black">
           <WeatherByCountry
             longitude={longitude}
             latitude={latitude}
@@ -38,14 +52,23 @@ const MainHeading = ({
           {menuOpen ? <HiX /> : <HiMenu />}
         </button>
       </div>
+
       {menuOpen && (
         <div
           className={`w-full px-4 pb-4 flex flex-col gap-3 border-t ${colours.card} ${colours.text}`}
         >
-          <HomeBtn />
-          <SettingBtn />
-          <AboutBtn />
-          <AuthBtn />
+          {user ? (
+            <>
+              <Links />
+              <SignOutBtn />
+            </>
+          ) : (
+            <>
+              <Links />
+              <SigninBtn />
+              <SignupBtn />
+            </>
+          )}
         </div>
       )}
     </div>

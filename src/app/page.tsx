@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getWeather } from "@/api/Weather";
+import { getWeather } from "@/Api/Weather";
 import MainHeading from "@/components/banners/MainHeading";
-import MainBox from "@/components/banners/MainBox";
-import { weatherCodeDescriptions } from "@/api/CodeDescriptions";
-import { countryTimeZones } from "@/api/TimeZones";
+import MainBox from "@/components/boxes/MainBox";
+import { weatherCodeDescriptions } from "@/Api/CodeDescriptions";
+import { countryTimeZones } from "@/Api/TimeZones";
 import Footer from "@/components/banners/Footer";
-import TabelsBox from "@/components/banners/TabelsBox";
-import MissingFeatures from "@/components/banners/features";
+import TabelsBox from "@/components/boxes/TabelsBox";
+import MissingFeatures from "@/components/boxes/FeaturesBox";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Home() {
   const [temp, setTemp] = useState<number | null>(null);
@@ -27,6 +28,8 @@ export default function Home() {
 
   const [currentTime, setCurrentTime] = useState<Date | null>(null);
   const [time, setTime] = useState<string>("");
+
+  const { user } = useAuth();
 
   useEffect(() => {
     async function fetchWeather() {
@@ -133,7 +136,7 @@ export default function Home() {
           wind={wind}
           visibility={visibility}
         />
-        <MissingFeatures />
+        {user ? <></> : <MissingFeatures />}
         <Footer />
       </div>
     </>

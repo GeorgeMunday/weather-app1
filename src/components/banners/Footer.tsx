@@ -1,10 +1,10 @@
+"use client";
 import React from "react";
 import { useTheme } from "@/context/ThemeContext";
-import { tailwindColours } from "@/components/colours/ColorMode";
-import AboutBtn from "../buttons/AboutBtn";
-import AuthBtn from "../buttons/AuthBtn";
-import HomeBtn from "../buttons/HomeBtn";
-import SettingBtn from "../buttons/SettingBtn";
+import { tailwindColours } from "../colours/ColorMode";
+import AboutBtn from "../buttons/navigation/AboutBtn";
+import HomeBtn from "../buttons/navigation/HomeBtn";
+import SettingBtn from "../buttons/navigation/SettingBtn";
 
 const Footer = () => {
   const { isLight } = useTheme();
@@ -18,7 +18,6 @@ const Footer = () => {
           <HomeBtn />
           <AboutBtn />
           <SettingBtn />
-          <AuthBtn />
         </div>
         <div className="text-sm md:text-base">
           <span>Find more on my GitHub: </span>

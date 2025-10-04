@@ -35,13 +35,9 @@ const SignUp: React.FC = () => {
       });
 
       console.log("User registered and stored in Firestore:", user.uid);
-
-      // Clear form fields
       setUsername("");
       setEmail("");
       setPassword("");
-
-      // Redirect to homepage
       router.push("/");
     } catch (err: unknown) {
       if (err instanceof Error) {

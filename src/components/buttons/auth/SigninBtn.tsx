@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const AuthBtn = () => {
+const SigninBtn = () => {
   return (
     <>
       <Link href="/auth/signin">Sign in</Link>
@@ -9,4 +9,4 @@ const AuthBtn = () => {
   );
 };
 
-export default AuthBtn;
+export default SigninBtn;
