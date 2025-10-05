@@ -36,10 +36,13 @@ const MainHeading = ({
   );
 
   return (
-    <div className={`w-full ${colours.background} ${colours.text}`}>
-      <div className="w-full h-24 flex items-center justify-between px-4 z-50">
+    <nav
+      role="navigation"
+      className={`sticky top-0 w-full border-b ${colours.background} ${colours.text} z-50`}
+    >
+      <div className="flex items-center justify-between px-6 h-20">
         <BrandName />
-        <div className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50 text-black">
+        <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2">
           <WeatherByCountry
             longitude={longitude}
             latitude={latitude}
@@ -48,30 +51,48 @@ const MainHeading = ({
             setCountry={setCountry}
           />
         </div>
-        <button className="text-2xl" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <HiX /> : <HiMenu />}
-        </button>
-      </div>
-
-      {menuOpen && (
-        <div
-          className={`w-full px-4 pb-4 flex flex-col gap-3 border-t ${colours.card} ${colours.text}`}
-        >
+        <div className="hidden md:flex items-center gap-6">
+          <Links />
           {user ? (
-            <>
-              <Links />
-              <SignOutBtn />
-            </>
+            <SignOutBtn />
           ) : (
             <>
-              <Links />
+              <SigninBtn />
+              <SignupBtn />
+            </>
+          )}
+        </div>
+        <button
+          aria-label="Toggle menu"
+          className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <HiX size={26} /> : <HiMenu size={26} />}
+        </button>
+      </div>
+      {menuOpen && (
+        <div
+          className={`md:hidden flex flex-col gap-4 px-6 py-4 border-t ${colours.card} ${colours.text}`}
+        >
+          <Links />
+          <WeatherByCountry
+            longitude={longitude}
+            latitude={latitude}
+            setLongitude={setLongitude}
+            setLatitude={setLatitude}
+            setCountry={setCountry}
+          />
+          {user ? (
+            <SignOutBtn />
+          ) : (
+            <>
               <SigninBtn />
               <SignupBtn />
             </>
           )}
         </div>
       )}
-    </div>
+    </nav>
   );
 };
 

@@ -1,15 +1,21 @@
-import AboutBox from "@/components/boxes/AboutBox";
+"use client";
 import Footer from "@/components/banners/Footer";
 import SubHeading from "@/components/banners/SubHeading";
 import React from "react";
+import { useTheme } from "@/context/ThemeContext";
+import { tailwindColours } from "@/components/colours/ColorMode";
+import AboutText from "@/components/text/AboutText";
 
 const page = () => {
+  const { isLight, toggleTheme } = useTheme();
+  const colours = tailwindColours({ isLight, setIsLight: () => {} });
   return (
     <>
-      <SubHeading />
-      <hr className="border-gray-400 mb-0" />
-      <AboutBox />
-      <Footer />
+      <SubHeading text="About" />
+      <div className={`min-h-[80vh]  ${colours.background} ${colours.text}`}>
+        <AboutText />
+        <Footer />
+      </div>
     </>
   );
 };

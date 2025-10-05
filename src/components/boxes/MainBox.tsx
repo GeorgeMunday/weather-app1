@@ -9,29 +9,28 @@ const MainBox = ({ temp, time, description, feelTemp, country }: InfoTypes) => {
     setEmoji(getEmoji(description || ""));
   }, [description]);
 
-  // Background image selection
-  let backgroundImageURL = "";
-  switch (country) {
+  const safeCountry = country || "England";
+
+  let backgroundImageURL = `/placeholder.webp`;
+  switch (safeCountry) {
     case "USA":
-      backgroundImageURL = "./usa.avif";
+      backgroundImageURL = "/usa.avif";
       break;
     case "England":
-      backgroundImageURL = "./england.webp";
+      backgroundImageURL = "/england.webp";
       break;
     case "Germany":
-      backgroundImageURL = "germany.jpg";
+      backgroundImageURL = "/germany.jpg";
       break;
     case "Japan":
-      backgroundImageURL = "japan.webp";
+      backgroundImageURL = "/japan.webp";
       break;
     case "France":
-      backgroundImageURL = "france.jpg";
+      backgroundImageURL = "/france.jpg";
       break;
     case "Australia":
-      backgroundImageURL = "australia.webp";
+      backgroundImageURL = "/australia.webp";
       break;
-    default:
-      backgroundImageURL = "placeholder.webp";
   }
 
   return (

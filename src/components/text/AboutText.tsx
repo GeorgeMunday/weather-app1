@@ -1,6 +1,6 @@
 export default function AboutText() {
   return (
-    <div className="max-w-3xl mx-auto px-6 py-12">
+    <div className="max-w-6xl mx-auto px-6 p-3">
       <h1 className="text-3xl font-bold mb-6">About This Weather App</h1>
       <p className="mb-6">
         This project is a simple yet powerful weather application built with{" "}

@@ -11,7 +11,7 @@ const Footer = () => {
   const colours = tailwindColours({ isLight, setIsLight: () => {} });
   return (
     <footer
-      className={`${colours.background} ${colours.text} border-t ${colours.border}`}
+      className={`transition-colors duration-300 ${colours.background} ${colours.text} border-t ${colours.border}`}
     >
       <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="flex flex-wrap justify-center gap-6 text-sm md:text-base">

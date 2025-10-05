@@ -50,7 +50,7 @@ const SignUp: React.FC = () => {
 
   return (
     <>
-      <SubHeading />
+      <SubHeading text="Sign Up" />
       <hr className="border-gray-400 mb-0" />
       <div className="mx-4 md:mx-10 lg:mx-40 min-h-[90vh] border-t-0 border border-black flex justify-center items-center">
         <form

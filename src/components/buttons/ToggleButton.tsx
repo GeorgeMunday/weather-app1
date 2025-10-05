@@ -11,10 +11,7 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({
   children,
   className,
 }) => (
-  <button
-    className={`mt-4 px-4 py-2 rounded border ${className || ""}`}
-    onClick={onClick}
-  >
+  <button className={`${className || ""}`} onClick={onClick}>
     {children}
   </button>
 );
