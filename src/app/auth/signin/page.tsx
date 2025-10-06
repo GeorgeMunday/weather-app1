@@ -5,8 +5,12 @@ import { auth } from "@/firebase/firebase";
 import { useRouter } from "next/navigation";
 import SubHeading from "@/components/banners/SubHeading";
 import Footer from "@/components/banners/Footer";
+import { tailwindColours } from "@/components/colours/ColorMode";
+import { useTheme } from "@/context/ThemeContext";
 
 const page = () => {
+  const { isLight, toggleTheme } = useTheme();
+  const colours = tailwindColours({ isLight, setIsLight: () => {} });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -17,12 +21,12 @@ const page = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      router.push("/");
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
         setEmail("");
         setPassword("");
-        router.push("/");
       } else {
         setError("An unknown error occurred.");
       }
@@ -31,11 +35,12 @@ const page = () => {
   return (
     <>
       <SubHeading text="Sign In" />
-      <hr className="border-gray-400 mb-0" />
-      <div className="mx-4 md:mx-10 lg:mx-40 min-h-[90vh] border-t-0 border border-black flex justify-center items-center">
+      <div
+        className={`h-[80vh] flex justify-center items-center ${colours.background}`}
+      >
         <form
           onSubmit={handleSignIn}
-          className="w-full max-w-sm flex flex-col gap-4"
+          className={`w-full max-w-sm flex flex-col gap-4 p-15 rounded-2xl ${colours.card} ${colours.text} ${colours.border}`}
         >
           <input
             placeholder="Email"
@@ -43,7 +48,7 @@ const page = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full border border-black p-2"
+            className={`w-full border p-4 ${colours.border}`}
           />
           <input
             placeholder="Password"
@@ -51,12 +56,12 @@ const page = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full border border-black p-2"
+            className={`w-full border p-4 ${colours.border}`}
           />
           {error && <p className="text-black">{error}</p>}
           <button
             type="submit"
-            className="border border-black px-4 py-2 hover:bg-black hover:text-white"
+            className={`w-full border p-4 ${colours.border}`}
           >
             Submit
           </button>

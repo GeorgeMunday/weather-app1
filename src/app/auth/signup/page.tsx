@@ -6,10 +6,13 @@ import { db, auth } from "@/firebase/firebase";
 import { useRouter } from "next/navigation";
 import SubHeading from "@/components/banners/SubHeading";
 import Footer from "@/components/banners/Footer";
+import { tailwindColours } from "@/components/colours/ColorMode";
+import { useTheme } from "@/context/ThemeContext";
 
 const SignUp: React.FC = () => {
   const router = useRouter();
-
+  const { isLight, toggleTheme } = useTheme();
+  const colours = tailwindColours({ isLight, setIsLight: () => {} });
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,11 +54,12 @@ const SignUp: React.FC = () => {
   return (
     <>
       <SubHeading text="Sign Up" />
-      <hr className="border-gray-400 mb-0" />
-      <div className="mx-4 md:mx-10 lg:mx-40 min-h-[90vh] border-t-0 border border-black flex justify-center items-center">
+      <div
+        className={`h-[80vh] flex justify-center items-center ${colours.background}`}
+      >
         <form
           onSubmit={handleSignUp}
-          className="w-full max-w-sm flex flex-col gap-4"
+          className={`w-full max-w-sm flex flex-col gap-4 p-15 rounded-2xl ${colours.card} ${colours.text} ${colours.border}`}
         >
           <input
             placeholder="Username"
@@ -63,7 +67,7 @@ const SignUp: React.FC = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            className="w-full border border-black p-2"
+            className={`w-full border p-4 ${colours.border}`}
           />
           <input
             placeholder="Email"
@@ -71,7 +75,7 @@ const SignUp: React.FC = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full border border-black p-2"
+            className={`w-full border p-4 ${colours.border}`}
           />
           <input
             placeholder="Password"
@@ -79,12 +83,12 @@ const SignUp: React.FC = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full border border-black p-2"
+            className={`w-full border p-4 ${colours.border}`}
           />
           {error && <p className="text-black">{error}</p>}
           <button
             type="submit"
-            className="border border-black px-4 py-2 hover:bg-black hover:text-white"
+            className={`w-full border p-4 ${colours.border}`}
           >
             Submit
           </button>

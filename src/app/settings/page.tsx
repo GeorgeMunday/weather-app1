@@ -11,7 +11,7 @@ import { useAuth } from "@/context/AuthContext";
 const SettingsPage = () => {
   const { isLight, toggleTheme } = useTheme();
   const colours = tailwindColours({ isLight, setIsLight: () => {} });
-  const [timeFormat, setTimeFormat] = useState<"12h" | "24h">("12h");
+  const [timeFormat, setTimeFormat] = useState<12 | 24>(24);
   const [temperatureUnit, setTemperatureUnit] = useState<"C" | "F">("C");
   const [windUnit, setWindUnit] = useState<"km/h" | "mph">("km/h");
   const [pressureUnit, setPressureUnit] = useState<"hPa" | "inHg">("hPa");
@@ -47,9 +47,7 @@ const SettingsPage = () => {
               <span>Time Format</span>
               <button
                 className="px-4 py-2 rounded-lg border bg-blue-600 text-white hover:bg-blue-700 transition-colors"
-                onClick={() =>
-                  setTimeFormat(toggleValue(timeFormat, "12h", "24h"))
-                }
+                onClick={() => setTimeFormat(toggleValue(timeFormat, 12, 24))}
               >
                 {timeFormat}
               </button>
