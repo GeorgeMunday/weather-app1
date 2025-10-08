@@ -29,9 +29,9 @@ const TabelsBox = ({
           { title: "Temperature | °C", data: dailyTemp, color: "#f97316" },
           { title: "Chance of Rain | %", data: rainChance, color: "#0ea5e9" },
           { title: "Humidity | %", data: humidity, color: "#22c55e" },
-          { title: "Cloud Cover | %", data: cloudCover, color: "#64748b" },
-          { title: "Wind Speed | km/h", data: wind, color: "#64748b" },
-          { title: "Visibility | m", data: visibility, color: "#64748b" },
+          { title: "Cloud Cover | %", data: cloudCover, color: "#f43f5e" },
+          { title: "Wind Speed | km/h", data: wind, color: "#8b5cf6" },
+          { title: "Visibility | m", data: visibility, color: "#eab308" },
         ].map((item, idx) => (
           <div
             key={idx}
